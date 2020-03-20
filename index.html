@@ -17,8 +17,8 @@
   <script src="js/anchor.min.js"></script>
   <script src="js/table_of_contents.js"></script>
 
-  <!-- FONT
-  <link rel="stylesheet" type="text/css" href="/fonts/425974/1F0A82D67708082E5.css" /> -->
+  <!-- FONT -->
+  <link rel="stylesheet" type="text/css" href="/fonts/425974/1F0A82D67708082E5.css" />
 
   <!-- CSS  -->
   <link rel="stylesheet" href="css/normalize.css">
@@ -91,12 +91,13 @@
     h1 {
         /* font-variant: small-caps; Problems with Safari. */
         font-family: "Operator A", "Operator B";
+        font-size: 3.5rem;
     }
 
     h2 {
       font-family: "Operator A", "Operator B";
       font-style: italic;
-      font-size: 3.5rem;
+      font-size: 2.5rem;
     }
 
     h3 {
@@ -194,28 +195,28 @@ ul > li {
 
 <!-- PEP 8 BEGINS -->
 
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">介绍</h1>
 
-<p>This document gives coding conventions for the Python code comprising the standard library in the main Python distribution. Please see the companion informational PEP describing style guidelines for the C code in the C implementation of Python <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>这篇文档，描述了Python主发行版中，标准库代码所遵循的规范。对于Python的C语言实现中采用的编码规范，请参考实现Python的C代码风格指南 <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>。</p>
 
-<p>This document and <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (Docstring Conventions) were adapted from Guido’s original Python Style Guide essay, with some additions from Barry’s style guide <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>本文档与 <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (Docstring 约定) 均改编自Guido最早的Python风格指南文章，并添加了一些Barry的风格指南<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>中的内容。</p>
 
-<p>This style guide evolves over time as additional conventions are identified and past conventions are rendered obsolete by changes in the language itself.</p>
+<p>语言自身在不断改变，随着新规范出现、旧规范过时，代码风格也会随时间而改变。</p>
 
-<p>Many projects have their own coding style guidelines. In the event of any conflicts, such project-specific guides take precedence for that project.</p>
+<p>很多项目都有自己的一套代码风格指南。如果和本指南发生冲突，应优先考虑项目相关指南。</p>
 
 
-<h1 id="a-foolish-consistency-is-the-hobgoblin-of-little-minds">A Foolish Consistency is the Hobgoblin of Little Minds</h1>
+<h1 id="a-foolish-consistency-is-the-hobgoblin-of-little-minds">不要为一致性而一致性</h1>
 
-<p>One of Guido’s key insights is that code is read much more often than it is written. The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code. As <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> says, “Readability counts”.</p>
+<p>Guido的重要观点之一，就是代码被读的次数，比写的次数多得多。本指南旨在改善代码的可读性，让不同人写的、各式各样的Python代码，风格也能保持一致。就像<a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a>《Python之禅(Zen of Python)》里说的：“可读性至上(Readability counts)”。</p>
 
-<p>A style guide is about consistency. Consistency with this style guide is important. Consistency within a project is more important. Consistency within one module or function is the most important.</p>
+<p>风格指南讲的就是一致性。和风格指南保持一致很重要。在项目内部保持一致性，则更为重要。在同模块、函数内部保持一致性，则更更重要。</p>
 
-<p>However, know when to be inconsistent&mdash;sometimes style guide recommendations just aren't applicable. When in doubt, use your best judgment. Look at other examples and decide what looks best. And don’t hesitate to ask!</p>
+<p>但，至关重要的是：知道什么情况下，应该违背一致性————风格指南并非处处适用。当存有疑虑时，请自行做出最佳决断。参考其他例子，做出最佳决定。有话就问。</p>
 
-<p>In particular: do not break backwards compatibility just to comply with this PEP!</p>
+<p>尤其是：千万不要为了遵循本PEP，破坏向后兼容性！</p>
 
-<p>Some other good reasons to ignore a particular guideline:</p>
+<p>有足够理由忽略本指南的另外几种情况：</p>
 
 <div class="row">
 <div class="one column">&nbsp;</div>
@@ -223,10 +224,10 @@ ul > li {
 
 <ol style="list-style-type: decimal">
 
-    <li>When applying the guideline would make the code less readable, even for someone who is used to reading code that follows this PEP.</li>
-    <li>To be consistent with surrounding code that also breaks it (maybe for historic reasons) – although this is also an opportunity to clean up someone else’s mess (in true XP style).</li>
-    <li>Because the code in question predates the introduction of the guideline and there is no other reason to be modifying that code.</li>
-    <li>When the code needs to remain compatible with older versions of Python that don’t support the feature recommended by the style guide.</li>
+    <li>当应用风格指南，会让代码更难读，甚至让那些习惯读本PEP风格代码的人都觉得难懂时。</li>
+    <li>需要和周围代码保持一致性，这些代码与指南风格相悖（可能是历史原因）——尽管这可能是个收拾别人烂摊子的好机会（真正的极限编程）。</li>
+    <li>如果有问题的代码，时间早于引进指南的时间，就没必要修改它们。</li>
+    <li>代码要和旧版Python保持兼容，而旧版Python不支持风格指南推荐的特性。</li>
 </ol>
 
 </div>
@@ -235,77 +236,76 @@ ul > li {
 
 
 
-<h1 id="code-lay-out">Code Layout</h1>
+<h1 id="code-lay-out">代码布局</h1>
 
 
-<h2 id="indentation">Indentation</h2>
+<h2 id="indentation">缩进</h2>
 
 
-<p>Use 4 spaces per indentation level.</p>
+<p>每级缩进，用4个空格表示。</p>
 
-<p>Continuation lines should align wrapped elements either vertically using Python’s implicit line joining inside parentheses, brackets and braces, or using a <em>hanging indent</em> <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. When using a hanging indent the following should be considered; there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line.</p>
+<p>同一连续行包含的元素，要么用Python的隐式续行对齐，即垂直对齐于圆括号、方括号或花括号，要么用悬挂缩进(hanging indent)<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>对齐。悬挂缩进需要考虑两点：第一行不要包括参数，在续行中需要再增加一级缩进，以表明其与前一行是接续关系。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
-<pre><code class="language-python"># Aligned with opening delimiter.
+<pre><code class="language-python"># 和开始分界符(左括号)对齐
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
 
-# Add 4 spaces (an extra level of indentation) to distinguish arguments from the rest.
+# 续行多四个空格(多缩进一级)以同其他代码区别
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
     print(var_one)
 
-# Hanging indents should add a level.
+# 悬挂缩进要多缩进一级
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)</code></pre>
 
 <p class="no"><span>No:</span></p>
 
-<pre><code class="language-python"># Arguments on first line forbidden when not using vertical alignment.
+<pre><code class="language-python"># 垂直对齐时第一行不应该有参数
 foo = long_function_name(var_one, var_two,
     var_three, var_four)
 
-# Further indentation required as indentation is not distinguishable.
+# 和后续行没有区分开，需要多缩进一级
 def long_function_name(
     var_one, var_two, var_three,
     var_four):
     print(var_one)</code></pre>
 
-<p>The 4-space rule is optional for continuation lines.</p>
+<p>对续行来说，4空格的规则是可选项。</p>
 
-<p>Optional:</p>
+<p>也就是说，这样也可以：</p>
 
-<pre><code class="language-python"># Hanging indents *may* be indented to other than 4 spaces.
+<pre><code class="language-python"># 悬挂缩进可以不用4个空格表示缩进
 foo = long_function_name(
   var_one, var_two,
   var_three, var_four)</code></pre>
 
 <a id="if-statements"></a>
-<p>When the conditional part of an <code>if</code>-statement is long enough to require that it be written across multiple lines, it’s worth noting that the combination of a two character keyword (i.e. <code>if</code>), plus a single space, plus an opening parenthesis creates a natural 4-space indent for the subsequent lines of the multiline conditional. This can produce a visual conflict with the indented suite of code nested inside the <code>if</code>-statement, which would also naturally be indented to 4 spaces. This PEP takes no explicit position on how (or whether) to further visually distinguish such conditional lines from the nested suite inside the <code>if</code>-statement. Acceptable options in this situation include, but are not limited to:</p>
+<p>如果<code>if</code>语句的条件太长、要分成多行，值得注意一点在于，双字符关键字(<code>if</code>等)加上一个空格、一个左括号，宽度正好等于4空格，自然就会造成续行的部分缩进也为4个空格，看上去明显和<code>if</code>条件语句中嵌套的其他缩进语句冲突了。本PEP中不强制要求如何区分续行的条件语句和<code>if</code>条件语句中嵌套的其他语句。以下几种方法都是可行的，且不仅限于这几种方法：</p>
 
-<pre><code class="language-python"># No extra indentation.
+<pre><code class="language-python"># 不另外加缩进
 if (this_is_one_thing and
     that_is_another_thing):
     do_something()
 
-# Add a comment, which will provide some distinction in editors
-# supporting syntax highlighting.
+# 增加一行注释，在编辑器高亮时能有所区分
 if (this_is_one_thing and
     that_is_another_thing):
     # Since both conditions are true, we can frobnicate.
     do_something()
 
-# Add some extra indentation on the conditional continuation line.
+# 为条件语句的续行增加一级缩进
 if (this_is_one_thing
         and that_is_another_thing):
     do_something()</code></pre>
 
-<p>(Also see the discussion of whether to break before or after binary operators below.)</p>
+<p>（另请参见下面关于应该在二元操作符之前还是之后断开的讨论）</p>
 
-<p>The closing brace/bracket/parenthesis on multiline constructs may either line up under the first non-whitespace character of the last line of list, as in:</p>
+<p>续行多行结束右圆括号/方括号/花括号，可以单起一行写，和上一行首个非空白字符对齐，像这样：</p>
 
 <pre><code class="language-python">my_list = [
     1, 2, 3,
@@ -315,7 +315,7 @@ result = some_function_that_takes_arguments(
     &#39;a&#39;, &#39;b&#39;, &#39;c&#39;,
     &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
     )</code></pre>
-<p>or it may be lined up under the first character of the line that starts the multiline construct, as in:</p>
+<p>也可以和多行最开始那一行第一个字符对齐：</p>
 <pre><code class="language-python">my_list = [
     1, 2, 3,
     4, 5, 6,
@@ -326,52 +326,52 @@ result = some_function_that_takes_arguments(
 )</code></pre>
 
 
-<h2 id="tabs-or-spaces">Tabs or Spaces?</h2>
+<h2 id="tabs-or-spaces">Tab 还是 空格?</h2>
 
-<p>Spaces are the preferred indentation method.</p>
+<p>建议用空格进行缩进。</p>
 
-<p>Tabs should be used solely to remain consistent with code that is already indented with tabs.</p>
+<p>只有在已有代码用的是tab缩进时，为了和之前代码保持一致，才使用tab。</p>
 
-<p>Python 3 disallows mixing the use of tabs and spaces for indentation.</p>
+<p>Python 3 不允许tab和空格混合进行缩进。</p>
 
-<p>Python 2 code indented with a mixture of tabs and spaces should be converted to using spaces exclusively.</p>
+<p>Python 2 代码若有tab、空格混用的情况，应把tab全部转换为空格。</p>
 
-<p>When invoking the Python 2 command line interpreter with the <code>-t</code> option, it issues warnings about code that illegally mixes tabs and spaces. When using <code>-tt</code> these warnings become errors. These options are highly recommended!</p>
+<p>用命令行运行Python 2时，使用<code>-t</code>选项，混用tab和空格会出现非法使用的警告。当使用<code>-tt</code>选项时，警告会升级为错误。强烈推荐使用这些选项！</p>
 
 
-<h2 id="maximum-line-length">Maximum Line Length</h2>
+<h2 id="maximum-line-length">单行最大长度</h2>
 
-<p>Limit all lines to a maximum of 79 characters.</p>
+<p>把所有行长度限制在79个字符以内。</p>
 
-<p>For flowing long blocks of text with fewer structural restrictions (docstrings or comments), the line length should be limited to 72 characters.</p>
+<p>对于连续大段、结构限制又较少的文字（如文档字符串(docstring)或注释），单行长度应限制在72个字符以内。</p>
 
-<p>Limiting the required editor window width makes it possible to have several files open side-by-side, and works well when using code review tools that present the two versions in adjacent columns.</p>
+<p>限制编辑器的窗口宽度，让多个文件可同时打开并显示在屏幕上，在用代码评审(code review)工具时，可在两个相邻窗口显示两个版本的代码而不影响效果。</p>
 
-<p>The default wrapping in most tools disrupts the visual structure of the code, making it more difficult to understand. The limits are chosen to avoid wrapping in editors with the window width set to 80, even if the tool places a marker glyph in the final column when wrapping lines. Some web based tools may not offer dynamic line wrapping at all.</p>
+<p>很多工具的默认自动换行功能，会破坏代码结构，使代码更难以理解。选择限制长度，是为了避免在窗口宽度设置为80的编辑器中换行，即使工具在换行时在最后一列放置了标记符号。一些网页版工具可能根本都不提供动态换行。</p>
 
-<p>Some teams strongly prefer a longer line length. For code maintained exclusively or primarily by a team that can reach agreement on this issue, it is okay to increase the line length limit up to 99 characters, provided that comments and docstrings are still wrapped at 72 characters.</p>
+<p>有些团队强烈希望采用更长的单行长度。如果代码仅由或主要由能就此问题达成一致的团队维护，可将行长度限制增加到99个字符，但注释和文档字符串仍遵循72字符换行。</p>
 
-<p>The Python standard library is conservative and requires limiting lines to 79 characters (and docstrings/comments to 72).</p>
+<p>Python标准库比较保守，要求将单行限制在79字符以内(文档字符串/注释限制在72个)。</p>
 
-<p>The preferred way of wrapping long lines is by using Python’s implied line continuation inside parentheses, brackets and braces. Long lines can be broken over multiple lines by wrapping expressions in parentheses. These should be used in preference to using a backslash for line continuation.</p>
+<p>一种推荐的长行换行方式，是用Python的圆括号、方括号和花括号进行隐式续行。长行可通过在括号内换行来分成多行。最好加上反斜杠以区别续行。</p>
 
-<p>Backslashes may still be appropriate at times. For example, long, multiple <code>with</code>-statements cannot use implicit continuation, so backslashes are acceptable:</p>
+<p>有时续行只能用反斜杠。例如，较长的、包含多个部分的<code>with</code>语句不能用隐式续行，只能用反斜杠表示换行：</p>
 
 <pre><code class="language-python">with open(&#39;/path/to/some/file/you/want/to/read&#39;) as file_1, \
      open(&#39;/path/to/some/file/being/written&#39;, &#39;w&#39;) as file_2:
     file_2.write(file_1.read())</code></pre>
 
-<p>(See the previous discussion on <a href="#if-statements">multiline if-statements</a> for further thoughts on the indentation of such multiline <code>with</code>-statements.)</p>
+<p>（这里<code>with</code>语句的缩进可参照前面关于 <a href="#if-statements">多行if语句</a>缩进的讨论）</p>
 
-<p>Another such case is with <code>assert</code> statements.</p>
+<p>另一个类似的例子是<code>assert</code>语句。</p>
 
-<p>Make sure to indent the continued line appropriately.</p>
+<p>请确保续行具有适当的缩进。</p>
 
-<h2 id="break-before-or-after-binary-operator">Should a Line Break Before or After a Binary Operator?</h2>
+<h2 id="break-before-or-after-binary-operator">二元操作符换行在前在后？</h2>
 
-<p class="no">For decades the recommended style was to break after binary operators. But this can hurt readability in two ways: the operators tend to get scattered across different columns on the screen, and each operator is moved away from its operand and onto the previous line. Here, the eye has to do extra work to tell which items are added and which are subtracted:</p>
+<p class="no">长期以来推荐风格是在二元操作符之后换行。但是这样会影响代码可读性，主要是两方面：一是运算符会分布在屏幕上的不同列上(参差不齐)，二是操作符会留在前一行、远离右边的操作数。读代码的时候眼睛要费点劲，才能看清谁被加了，谁又被减了：</p>
 
-<pre><code class="language-python"># No: operators sit far away from their operands
+<pre><code class="language-python"># No: 操作符远离操作数
 income = (gross_wages +
           taxable_interest +
           (dividends - qualified_dividends) -
@@ -379,13 +379,13 @@ income = (gross_wages +
           student_loan_interest)
 </code></pre>
 
-<p>To solve this readability problem, mathematicians and their publishers follow the opposite convention. Donald Knuth explains the traditional rule in his <em>Computers and Typesetting</em> series:</p>
+<p>为了解决这个可读性问题，数学家和出版商遵循相反的惯例，Donald Knuth在他的<em>电脑与排版</em>系列中解释了传统的规则：</p>
 
-<blockquote>“Although formulas within a paragraph always break after binary operations and relations, displayed formulas always break before binary operations” <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</blockquote>
+<blockquote>“虽然段落中的公式总是在二元操作和关联之后换行，但显示公式时总是在二元操作之前中断”<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</blockquote>
 
-<p class="yes">Following the tradition from mathematics usually results in more readable code:</p>
+<p class="yes">遵循数学传统往往会产生更易读的代码:</p>
 
-<pre><code class="language-python"># Yes: easy to match operators with operands
+<pre><code class="language-python"># Yes: 匹配操作符和操作数更容易
 income = (gross_wages
           + taxable_interest
           + (dividends - qualified_dividends)
@@ -393,19 +393,19 @@ income = (gross_wages
           - student_loan_interest)
 </code></pre>
 
-<p>In Python code, it is permissible to break before or after a binary operator, as long as the convention is consistent locally. For new code Knuth's style is suggested.</p>
+<p>Python代码中，在二元操作符之前或之后换行都可以，只要按约定在局部保持一致即可。对于新的代码，建议直接用Knuth风格。</p>
 
-<h2 id="blank-lines">Blank Lines</h2>
+<h2 id="blank-lines">空行</h2>
 
-<p>Surround top-level function and class definitions with two blank lines.</p>
+<p>用2个空行来分隔最外层的函数(function)和类(class)定义。</p>
 
-<p>Method definitions inside a class are surrounded by a single blank line.</p>
+<p>用1个空行来分隔类中的方法(method)定义。</p>
 
-<p>Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).</p>
+<p>可以(尽量少)用额外的空行来分隔相关成组的函数。在一系列相关且仅占一行的函数间，空行可以省略(比如一组伪实现(dummy implementation))。</p>
 
-<p>Use blank lines in functions, sparingly, to indicate logical sections.</p>
+<p>在函数内，(尽量少)用空行以使代码逻辑更清晰。</p>
 
-<p>Python accepts the control-L (i.e. ^L) form feed character as whitespace; Many tools treat these characters as page separators, so you may use them to separate pages of related sections of your file. Note, some editors and web-based code viewers may not recognize control-L as a form feed and will show another glyph in its place.</p>
+<p>Python支持control-L(如:^L)换页符作为空格；许多工具将这些符号看做分页符，你可以用它们将文件相关部分分隔成单独的页。请注意，一些编辑器和网页版代码查看器可能不会将control-L识别为分页符，而是将其显示为其他符号。</p>
 
 
 <h2 id="source-file-encoding">Source File Encoding</h2>
