@@ -225,7 +225,7 @@ ul > li {
 <ol style="list-style-type: decimal">
 
     <li>当应用风格指南，会让代码更难读，甚至让那些习惯读本PEP风格代码的人都觉得难懂时。</li>
-    <li>需要和周围代码保持一致性，这些代码与指南风格相悖（可能是历史原因）——尽管这可能是个收拾别人烂摊子的好机会（真正的极限编程）。</li>
+    <li>需要和周围代码保持一致性，这些代码与指南风格相悖（可能是历史原因）————尽管这可能是个收拾别人烂摊子的好机会（真正的极限编程）。</li>
     <li>如果有问题的代码，时间早于引进指南的时间，就没必要修改它们。</li>
     <li>代码要和旧版Python保持兼容，而旧版Python不支持风格指南推荐的特性。</li>
 </ol>
@@ -367,7 +367,7 @@ result = some_function_that_takes_arguments(
 
 <p>请确保续行具有适当的缩进。</p>
 
-<h2 id="break-before-or-after-binary-operator">二元操作符换行在前在后？</h2>
+<h2 id="break-before-or-after-binary-operator">二元操作符之前换行还是之后？</h2>
 
 <p class="no">长期以来推荐风格是在二元操作符之后换行。但是这样会影响代码可读性，主要是两方面：一是运算符会分布在屏幕上的不同列上(参差不齐)，二是操作符会留在前一行、远离右边的操作数。读代码的时候眼睛要费点劲，才能看清谁被加了，谁又被减了：</p>
 
@@ -425,7 +425,7 @@ income = (gross_wages
 
 <ul>
 
-<li><p>Imports should usually be on separate lines</p>
+<li><p>Import应该每行一个、单独写。</p>
 
 <p class="yes"><span>Yes:</span></p>
 <pre><code class="language-python">import os
@@ -434,57 +434,57 @@ import sys</code></pre>
 <p class="no"><span>No:</span></p>
 <pre><code class="language-python">import os, sys</code></pre>
 
-<p>It’s okay to say this though:</p>
+<p>当然，这样写是可以的：</p>
 
 <pre><code class="language-python">from subprocess import Popen, PIPE</code></pre></li>
 
-<li><p>Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.</p>
+<li><p>Imports总是位于代码文件的开头，在模块(module)注释和文档字符串(docstring)之后、模块全局变量(globals)和常量(constants)声明之前。</p>
 
-<p>Imports should be grouped in the following order:</p>
+<p>Imports按如下顺序分组写:</p>
 
 <ol style="list-style-type: decimal">
-<li>Standard library imports</li>
-<li>Related third party imports</li>
-<li>Local application/library specific imports</li>
+<li>标准库imports</li>
+<li>相关第三方imports</li>
+<li>本地应用/库特定imports</li>
 </ol>
 
-<p>You should put a blank line between each group of imports.</p>
+<p>不同组imports之间用空行隔开。</p>
 
-<li><p>Absolute imports are recommended, as they are usually more readable and tend to be better behaved (or at least give better error messages) if the import system is incorrectly configured (such as when a directory inside a package ends up on <code>sys.path</code>):</p>
+<li><p>推荐用绝对imports(absolute imports)，一方面更易读，另一方面，就算import系统配置有问题(比如包中路径以<code>sys.path</code>结尾)，也能表现得更好一些(至少会给出错误信息)：</p>
 
 <pre><code class="language-python">import mypkg.sibling
 from mypkg import sibling
 from mypkg.sibling import example</code></pre>
 
-<p>However, explicit relative imports are an acceptable alternative to absolute imports, especially when dealing with complex package layouts where using absolute imports would be unnecessarily verbose:</p>
+<p>不过，除绝对imports之外，显式的相对imports，也是一种可以接受的替代方式。特别是包布局(package layouts)比较复杂时，用绝对imports会显得有些啰嗦：</p>
 
 <pre><code class="language-python">from . import sibling
 from .sibling import example</code></pre>
 
-<p>Standard library code should avoid complex package layouts and always use absolute imports.</p>
+<p>标准库代码总是用绝对imports，并避免复杂的包布局。</p>
 
-<p>Implicit relative imports should <em>never</em> be used and have been removed in Python 3.</p></li>
+<p><b>绝对不用</b>隐式的相对imports，在Python 3中已经被去掉了。</p></li>
 
-<li><p>When importing a class from a class-containing module, it’s usually okay to spell this:</p>
+<li><p>从包含类的模块中import类，通常可以这样写：</p>
 
 <pre><code class="language-python">from myclass import MyClass
 from foo.bar.yourclass import YourClass</code></pre>
 
-<p>If this spelling causes local name clashes, then spell them explicitly :</p>
+<p>如果拼写和本地命名发生冲突，直接import模块：</p>
 
 <pre><code class="language-python">import myclass
 import foo.bar.yourclass</code></pre>
 
-<p>and use <code>myclass.MyClass</code> and <code>foo.bar.yourclass.YourClass</code>.</p></li>
+<p>然后用<code>myclass.MyClass</code>和<code>foo.bar.yourclass.YourClass</code>引用类。</p></li>
 
-<li><p>Wildcard imports (<code>from &lt;module&gt; import *</code>) should be avoided, as they make it unclear which names are present in the namespace, confusing both readers and many automated tools. There is one defensible use case for a wildcard import, which is to republish an internal interface as part of a public API (for example, overwriting a pure Python implementation of an interface with the definitions from an optional accelerator module and exactly which definitions will be overwritten isn’t known in advance).</p>
+<li><p>避免用通配符import(<code>from &lt;module&gt; import *</code>)，这样会造成当前命名空间搞不清哪些名字已用，给读者和自动化工具造成困扰。有一种情况可使用通配符import：将内部接口再发布成公用API的一部分(比如，用候选加速模块中的定义，覆盖纯Python实现的接口，预先无法知晓具体哪些定义将被覆盖)。</p>
 
-<p>When republishing names this way, the guidelines below regarding public and internal interfaces still apply.</p></li>
+<p>以这种方式再发布命名时，后面关于公共接口和内部接口的准则依然适用。</p></li>
 </ul>
 
-<h2 id="module-level-dunder-names">Module Level Dunder Names</h2>
+<h2 id="module-level-dunder-names">模块级双下划线命名</h2>
 
-<p>Module level "dunders" (i.e. names with two leading and two trailing underscores) such as <code>__all__</code>, <code>__author__</code>, <code>__version__</code>, etc. should be placed after the module docstring but before any import statements <em>except</em> <code>from __future__</code> imports. Python mandates that future-imports must appear in the module before any other code except docstrings.</p>
+<p>模块级“双下滑线”(名字开头有两个下划线，结尾也有两个下划线)变量，如<code>__all__</code>, <code>__author__</code>, <code>__version__</code>等，应该放在模块文档字符串(docstring)之后、所有import语句之前，<b>除非是</b><code>from __future__</code> imports。Python要求，在模块中<code>from __future__</code> imports必须出现在除文档字符串(docstring)之外的所有代码之前。</p>
 
 <pre><code class="language-python">"""This is the example module.
 
@@ -501,25 +501,25 @@ import os
 import sys
 </code></pre>
 
-<h1 id="string-quotes">String Quotes</h1>
+<h1 id="string-quotes">字符串的引用</h1>
 
 
-<p>In Python, single-quoted strings and double-quoted strings are the same. This PEP does not make a recommendation for this. Pick a rule and stick to it. When a string contains single or double quote characters, however, use the other one to avoid backslashes in the string. It improves readability.</p>
+<p>在Python中，用单引号或双引号表示字符串都是一样的。但PEP不推荐两者混用。可以选择其中一种，坚持用下去。字符串包含单引号时，用双引号来表示字符串，反之亦然，可以避免用反斜杠转义，提高可读性。</p>
 
-<p>For triple-quoted strings, always use double quote characters to be consistent with the docstring convention in <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a>.</p>
-
-
-<h1 id="whitespace-in-expressions-and-statements">Whitespace in Expressions and Statements</h1>
+<p>三引号包围的字符串中，总是用双引号，以便和<a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a>的文档字符串(docstring)规则保持一致。</p>
 
 
-<h2 id="pet-peeves">Pet Peeves</h2>
+<h1 id="whitespace-in-expressions-and-statements">表达式和语句中的空格</h1>
 
 
-<p>Avoid extraneous whitespace in the following situations:</p>
+<h2 id="pet-peeves">招人烦</h2>
+
+
+<p>下列情形中避免用多余空格：</p>
 
 <ul>
 
-<li><p>Immediately inside parentheses, brackets or braces:</p>
+<li><p>方括号、圆括号和花括号在括号内紧挨着括号的部分：</p>
 
 <p class="yes"><span>Yes:</span></p>
 <pre><code class="language-python">spam(ham[1], {eggs: 2})</code></pre>
@@ -529,7 +529,7 @@ import sys
 
 </li>
 
-<li><p>Between a trailing comma and a following close parenthesis:</p>
+<li><p>结尾处的逗号和紧挨着的的右括号之间：</p>
 
 <p class="yes"><span>Yes:</span></p>
 <pre><code class="language-python">foo = (0,)</code></pre>
@@ -539,7 +539,7 @@ import sys
 
 </li>
 
-<li><p>Immediately before a comma, semicolon, or colon:</p>
+<li><p>紧接着是逗号、分号或冒号：</p>
 
 <p class="yes"><span>Yes:</span></p>
 <pre><code class="language-python">if x == 4: print x, y; x, y = y, x</code></pre>
@@ -547,7 +547,7 @@ import sys
 <p class="no"><span>No:</span></p>
 <pre><code class="language-python">if x == 4 : print x , y ; x , y = y , x</code></pre>
 
-<li><p>However, in a slice the colon acts like a binary operator, and should have equal amounts on either side (treating it as the operator with the lowest priority). In an extended slice, both colons must have the same amount of spacing applied. Exception: when a slice parameter is omitted, the space is omitted.</p>
+<li><p>不过，切片操作中的冒号和二元操作符一样，应该在其左右两边保留相同数量的空格(就像其他低优先级的运算符一样)。在扩展切片操作中，所有冒号的左右两边空格数都应该相等。不过也有例外，当切片操作参数被省略时，应忽略空格。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -564,7 +564,7 @@ ham[1: 9], ham[1 :9], ham[1:9 :3]
 ham[lower : : upper]
 ham[ : upper]</code></pre></li>
 
-<li><p>Immediately before the open parenthesis that starts the argument list of a function call:</p>
+<li><p>函数调用时紧挨着传参数的左括号之前：</p>
 
 
 <p class="yes"><span>Yes:</span></p>
@@ -574,7 +574,7 @@ ham[ : upper]</code></pre></li>
 <pre><code class="language-python">spam (1)</code></pre>
 
 
-<li><p>Immediately before the open parenthesis that starts an indexing or slicing:</p>
+<li><p>索引和切片操作时紧挨着左括号之前：</p>
 
 
 <p class="yes"><span>Yes:</span></p>
@@ -582,7 +582,7 @@ ham[ : upper]</code></pre></li>
 <p class="no"><span>No:</span></p>
 <pre><code class="language-python">dct [&#39;key&#39;] = lst [index]</code></pre></li>
 
-<li><p>More than one space around an assignment (or other) operator to align it with another.</p>
+<li><p>赋值(或其他)操作符周围，用多个空格和其他语句对齐：</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -599,16 +599,16 @@ long_variable = 3</code></pre></li>
 </ul>
 
 
-<h2 id="other-recommendations">Other Recommendations</h2>
+<h2 id="other-recommendations">其他建议</h2>
 
 
 <ul>
 
-<li>Avoid trailing whitespace anywhere. Because it’s usually invisible, it can be confusing: e.g. a backslash followed by a space and a newline does not count as a line continuation marker. Some editors don’t preserve it and many projects (like CPython itself) have pre-commit hooks that reject it.</li>
+<li>行末不要加空白————又看不到，只会让人困惑：例如，后跟空格和换行符的反斜杠，不算作行延续标记。一些编辑器不会保留它们，许多项目(如CPython本身)会用预提交钩子(pre-commit hooks)干掉它们。</li>
 <p></p>
-<li>Always surround these binary operators with a single space on either side: assignment (<code>=</code>), augmented assignment (<code>+=</code>, <code>-=</code> etc.), comparisons (<code>==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>!=</code>, <code>&lt;&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>in</code>, <code>not in</code>, <code>is</code>, <code>is not</code>), Booleans (<code>and</code>, <code>or</code>, <code>not</code>).</li>
+<li>二元操作符两边都加一个空格：赋值(<code>=</code>)，增量赋值(<code>+=</code>, <code>-=</code> 等)，比较(<code>==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>!=</code>, <code>&lt;&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>in</code>, <code>not in</code>, <code>is</code>, <code>is not</code>)，布尔(<code>and</code>, <code>or</code>, <code>not</code>)。</li>
 <p></p>
-<li><p>If operators with different priorities are used, consider adding whitespace around the operators with the lowest priority(ies). Use your own judgment; however, never use more than one space, and always have the same amount of whitespace on both sides of a binary operator.</p>
+<li><p>如混合使用不同优先级的运算符，在优先级最低的操作符周围增加空白。可以自行判断；但，务必不要超过一个空格，务必保持二元操作符两侧空白一样多。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -626,7 +626,7 @@ x = x * 2 - 1
 hypot2 = x * x + y * y
 c = (a + b) * (a - b)</code></pre></li>
 
-<li><p>Function annotations should use the normal rules for colons and always have spaces around the <code>-&gt;</code> arrow if present. (See <a href="#function-annotations">Function Annotations</a> below for more about function annotations.)</p>
+<li><p>函数注释应使用冒号的常规规则，在<code>-&gt;</code>箭头左右加上空格(如果要用的话)。(有关函数注释的更多信息，请参见下面的<a href="#function-annotations">函数注释</a>)</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -638,7 +638,7 @@ def munge() -&gt; AnyStr: ...</code></pre>
 <pre><code class="language-python">def munge(input:AnyStr): ...
 def munge()-&gt;PosInt: ...</code></pre></li>
 
-<li><p>Don’t use spaces around the <code>=</code> sign when used to indicate a keyword argument,or when used to indicate a default value for an <em>unannotated</em> function parameter.</p>
+<li><p>用<code>=</code>表示关键字参数、或表示<b>未注解(unannotated)</b>函数参数的默认值时，不要在其左右加空格。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -650,7 +650,7 @@ def munge()-&gt;PosInt: ...</code></pre></li>
 <pre><code class="language-python">def complex(real, imag = 0.0):
     return magic(r = real, i = imag)</code></pre></li>
   
-<li><p>When combining an argument annotation with a default value, however, do use spaces around the <code>=</code> sign:</p>
+<li><p>函数注解和参数默认值组合使用时(参数既有函数注解，又有默认值），在<code>=</code>两边各用一个空格：</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -662,7 +662,7 @@ def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...</code></pre>
 <pre><code class="language-python">def munge(sep: AnyStr=None): ...
 def munge(input: AnyStr, sep: AnyStr=None, limit = 1000): ...</code></pre></li>
 
-<li><p>Compound statements (multiple statements on the same line) are generally discouraged.</p>
+<li><p>复合语句(将多行语句写成一行)一般不鼓励使用。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -677,7 +677,7 @@ do_three()</code></pre>
 <pre><code class="language-python">if foo == &#39;blah&#39;: do_blah_thing()
 do_one(); do_two(); do_three()</code></pre></li>
 
-<li><p>While sometimes it’s okay to put an if/for/while with a small body on the same line, never do this for multi-clause statements. Also avoid folding such long lines!</p>
+<li><p>有时，将短小的if/for/while中的语句写在一行是可以的，但对于多子句语句永远不要写成一行。也不要对这种长长的行换行续行处理！</p>
 
 <p class="no"><span>Rather not:</span></p>
 
@@ -701,20 +701,20 @@ if foo == &#39;blah&#39;: one(); two(); three()</code></pre></li>
 </ul>
 
 
-<h1 id="when-to-use-trailing-commas">When to Use Trailing Commas</h1>
+<h1 id="when-to-use-trailing-commas">何时在末尾加逗号</h1>
 
 
-<p>Trailing commas are usually optional, except they are mandatory when making a tuple of one element (and in Python 2 they have semantics for the <code>print</code> statement).  For clarity, it is recommended to surround the latter in (technically redundant) parentheses.</p>
+<p>末尾的逗号通常是可选的，只有在定义单元素元组(tuple)时是必需的(在Python 2中，具有<code>print</code>语句的语义)。为了更清楚，建议用括号(技术上是冗余的)括起来。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
 <pre><code class="language-python">FILES = ('setup.cfg',)</code></pre>
 
-<p>OK, but confusing:</p>
+<p>也还好, 但容易让人困惑：</p>
 
 <pre><code class="language-python">FILES = 'setup.cfg',</code></pre>
 
-<p>When trailing commas are redundant, they are often helpful when a version control system is used, when a list of values, arguments or imported items is expected to be extended over time. The pattern is to put each value (etc.) on a line by itself, always adding a trailing comma, and add the close parenthesis/bracket/brace on the next line. However it does not make sense to have a trailing comma on the same line as the closing delimiter (except in the above case of singleton tuples).</p>
+<p>虽然最后这个逗号是冗余的，但使用版本控制系统时，对于将来有可能扩充值、参数或import项目的列表来说，还是有好处的。具体来说，就是将每个元素单独写一行，行尾加逗号，最后的右括号单独占一行。但是，元素都在同一行上，末尾加逗号作为结束分隔符，是无意义的(除了上面单元素元组的情况)。</p>
 
 <p class="yes"><span>Yes:</span></p>
 
@@ -1315,7 +1315,7 @@ class Test:
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
   <!-- GitHub Banner. -->
-  <a href="https://github.com/kennethreitz/pep8.org"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <a href="https://github.com/fly51fly/fly51fly.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 
   <!-- JavaScripts! -->
