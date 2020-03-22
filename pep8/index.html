@@ -732,170 +732,167 @@ initialize(FILES,
 initialize(FILES, error=True,)</code></pre>
 
 
-<h1 id="comments">Comments</h1>
+<h1 id="comments">注释</h1>
 
 
-<p>Comments that contradict the code are worse than no comments. Always make a priority of keeping the comments up-to-date when the code changes!</p>
+<p>和代码相冲突的注释，还不如没有注释。代码有变动，一定优先保证注释也同步变动！</p>
 
-<p>Comments should be complete sentences. The first word should be capitalized, unless it is an identifier that begins with a lower case letter (never alter the case of identifiers!).</p>
+<p>注释应该用完整句子。第一个单词首字母要大写，除非是以小写字母开头的标识符(标识符千万不要改变大小写！)。</p>
 
-<p>Block comments generally consist of one or more paragraphs built out of complete sentences, with each sentence ending in a period.</p>
+<p>块注释通常由一个或多个由完整句子组成的段落构成，每个句子以句号结尾。</p>
 
-<p>You should use two spaces after a sentence-ending period in multi-sentence comments, except after the final sentence.</p>
+<p>如果是多句注释，除最后一句，在句尾的句号后应使用两个空格。</p>
 
-<p>When writing English, follow Strunk and White.</p>
+<p>如用英语书写，请参考Strunk和White的《The Elements of Style》。</p>
 
-<p>Python coders from non-English speaking countries: please write your comments in English, unless you are 120% sure that the code will never be read by people who don’t speak your language.</p>
-
-
-<h2 id="block-comments">Block Comments</h2>
+<p>对于非英语国家的Python程序员：请用英语写下注释，除非你有120%的把握不会给不懂你语言的人看。</p>
 
 
-<p>Block comments generally apply to some (or all) code that follows them, and are indented to the same level as that code. Each line of a block comment starts with a <code>#</code> and a single space (unless it is indented text inside the comment).</p>
-
-<p>Paragraphs inside a block comment are separated by a line containing a single <code>#</code>.</p>
+<h2 id="block-comments">块注释</h2>
 
 
-<h2 id="inline-comments">Inline Comments</h2>
+<p>块注释通常用于说明紧随其后的那些(或全部)代码，缩进级别和这些代码取齐。块注释的每一行，都以<code>#</code >和一个空格开始(除非文本是在注释内缩进对齐的)。</p>
+
+<p>块注释里的段落，由只包含一个< code>#</code >的行隔开。</p>
 
 
-<p>Use inline comments sparingly.</p>
+<h2 id="inline-comments">行内注释</h2>
 
-<p>An inline comment is a comment on the same line as a statement. Inline comments should be separated by at least two spaces from the statement. They should start with a # and a single space.</p>
 
-<p>Inline comments are unnecessary and in fact distracting if they state the obvious.</p>
-<p class="no"><span>Don’t do this:</span></p>
+<p>慎用行内注释。</p>
 
-<pre><code class="language-python">x = x + 1                 # Increment x</code></pre>
+<p>行内注释与语句写在同一行。行内注释和语句之间至少用两个空格隔开。注释以#和一个空格开始。</p>
 
-<p class="yes"><span>But sometimes, this is useful:</span></p>
+<p>行内注释并不必要，实际上，如果说明的是显而易见的事，反而会分散注意力。</p>
+<p class="no"><span>不要这样做:</span></p>
 
-<pre><code class="language-python">x = x + 1                 # Compensate for border</code></pre>
+<pre><code class="language-python">x = x + 1                 # x 自增</code></pre>
 
-<h2 id="documentation-strings">Documentation Strings</h2>
+<p class="yes"><span>但有时，这样做是有意义的:</span></p>
 
-<p>Conventions for writing good documentation strings (a.k.a. “docstrings”) are immortalized in <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a>.</p>
+<pre><code class="language-python">x = x + 1                 # 边界补偿</code></pre>
+
+<h2 id="documentation-strings">文档字符串</h2>
+
+<p>要写出好的文档字符串(docstrings)，请参考<a href = " https://www . python . org/dev/peps/PEP-0257/">PEP 257</a>。</p>
 
 <ul>
 
-<li>Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the <code>def</code> line.</li>
+<li>应该为所有公共模块、函数、类和方法编写文档字符串。对非公共方法，文档字符串不是必需的，但应该有注释来描述该方法的功能。此注释应出现在<code>def</code>定义行之后。</li>
 <p></p>
-<li><p><a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> describes good docstring conventions. Note that most importantly, the <code>&quot;&quot;&quot;</code> that ends a multiline docstring should be on a line by itself:</p>
+<li><p><a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> 描述了好的文档字符串应遵循的规则。请注意，最重要的是，多行的文档字符串，应该用单独一行<code>&quot;&quot;&quot;</code>结尾，不能出现其他字符：</p>
 
 <pre><code class="language-python">&quot;&quot;&quot;Return a foobang
 
 Optional plotz says to frobnicate the bizbaz first.
 &quot;&quot;&quot;</code></pre></li>
 
-<li>For one liner docstrings, please keep the closing <code>&quot;&quot;&quot;</code> on the same line.</li>
+<li>单行的文档字符串，请将<code>&quot;&quot;&quot;</code>加在同一行末尾。</li>
 
 </ul>
 
-<h1 id="naming-conventions">Naming Conventions</h1>
+<h1 id="naming-conventions">命名约定</h1>
 
 
-<p>The naming conventions of Python’s library are a bit of a mess, so we’ll never get this completely consistent – nevertheless, here are the currently recommended naming standards. New modules and packages (including third party frameworks) should be written to these standards, but where an existing library has a different style, internal consistency is preferred.</p>
+<p>Python库的命名约定有点混乱，所以我们永远都无法做到真正的一致————不过，这里给出目前推荐的命名标准。新的模块和包(包括第三方框架)应该按这些标准编写，但如果现有库有不同风格，还是首先要和原有风格保持内部一致性。</p>
 
 
-<h2 id="overriding-principle">Overriding Principle</h2>
+<h2 id="overriding-principle">首要原则</h2>
 
 
-<p>Names that are visible to the user as public parts of the API should follow conventions that reflect usage rather than implementation.</p>
+<p>作为对用户可见的API公共部分的命名，首先应反映其用途，而不是其实现细节。</p>
 
 
-<h2 id="descriptive-naming-styles">Descriptive: Naming Styles</h2>
+<h2 id="descriptive-naming-styles">描述性：命名风格</h2>
 
 
-<p>There are a lot of different naming styles. It helps to be able to recognize what naming style is being used, independently from what they are used for.</p>
+<p>有好几种不同的命名风格。最好是不论其用途、看名字能直接看出用的是什么命名风格。</p>
 
-<p>The following naming styles are commonly distinguished:</p>
+<p>命名风格常用区分如下：</p>
 
 <ul class="allowed">
 
-<li><code>b</code> (single lowercase letter)</li>
-<li><code>B</code> (single uppercase letter)</li>
-<li><code>lowercase</code></li>
-<li><code>lower_case_with_underscores</code></li>
-<li><code>UPPERCASE</code></li>
-<li><code>UPPER_CASE_WITH_UNDERSCORES</code></li>
-<li><code>CapitalizedWords</code> (or CapWords, CamelCase<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>, StudlyCaps)</li>
-<li><code>mixedCase</code> (differs from CapitalizedWords by initial lowercase character!)</li>
-<li><code>Capitalized_Words_With_Underscores</code> (ugly!)</li>
+<li><code>b</code> (单个小写字母)</li>
+<li><code>B</code> (单个大写字母)</li>
+<li><code>lowercase</code>(小写串)</li>
+<li><code>lower_case_with_underscores</code>(带下划线的小写串)</li>
+<li><code>UPPERCASE</code>(大写串)</li>
+<li><code>UPPER_CASE_WITH_UNDERSCORES</code>(带下划线的大写串)</li>
+<li><code>CapitalizedWords</code> (单词首字母大写串，也叫 CapWords, CamelCase<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>, StudlyCaps)</li>
+<li><code>mixedCase</code> (与单词首字母大写不同，第一个单词首字母是小写！)</li>
+<li><code>Capitalized_Words_With_Underscores</code> (难看！)</li>
 
 </ul>
 
 <div style="margin-left: -1.5em; padding-bottom: 1em;" class="row">
 
-<div class="one column"><strong><small>Note:</small></strong></div>
-<div class="eight columns"><p>When using acronyms in CapWords, capitalize all the letters of the acronyms. Thus <code>HTTPServerError</code> is better than <code>HttpServerError</code>.</p></div>
+<div class="one column"><strong><small>注意:</small></strong></div>
+<div class="eight columns"><p>采用CapWords风格时，缩写单词的所有字母都要大写。<code>HTTPServerError</code>就比<code>HttpServerError</code>要好。</p></div>
 
 
 </div>
 
-<p>There’s also the style of using a short unique prefix to group related names together. This is not used much in Python, but it is mentioned for completeness. For example, the <code>os.stat()</code> function returns a tuple whose items traditionally have names like <code>st_mode</code>, <code>st_size</code>, <code>st_mtime</code> and so on. (This is done to emphasize the correspondence with the fields of the POSIX system call struct, which helps programmers familiar with that.)</p>
+<p>还有一种风格，是用一个短且唯一的前缀，将相关的名字组合在一起。这在Python中用得不多，为完整起见还是提一下。例如, <code>os.stat()</code> 函数返回一个元组，其中元素按传统命名为<code>st_mode</code>, <code>st_size</code>, <code>st_mtime</code>等。(这样做，是为了强调与POSIX系统调用结构字段的一致性，让程序员感觉更熟悉)。</p>
 
-<p>The X11 library uses a leading X for all its public functions. In Python, this style is generally deemed unnecessary because attribute and method names are prefixed with an object, and function names are prefixed with a module name.</p>
+<p>X11库所有公共函数都以X开头。在Python中，这种风格往往被认为没必要，因为属性名和方法名有对象名作为前缀，函数名有模块名作为前缀。</p>
 
-<p>In addition, the following special forms using leading or trailing underscores are recognized (these can generally be combined with any case convention):</p>
+<p>此外，还要区别下列以下划线开始或结尾的特殊形式(可以与其他大小写规则结合使用)：</p>
 
 <ul>
 
-<li><code>_single_leading_underscore</code>: weak “internal use” indicator. E.g. <code>from M import *</code> does not import objects whose name start with an underscore.</li>
+<li><code>_single_leading_underscore</code>: (前置下划线)弱“内部专用”标志. 例如，<code>from M import *</code> 不导入名称以下划线开头的对象。</li>
 <p></p>
-<li><p><code>single_trailing_underscore_</code>: used by convention to avoid conflicts with Python keyword, e.g.:</p>
+<li><p><code>single_trailing_underscore_</code>: (后置下划线)按约定，可避免与Python关键字冲突, 例如：</p>
 
 <pre><code class="language-python">Tkinter.Toplevel(master, class_=&#39;ClassName&#39;)</code></pre></li>
 
-<li><code>__double_leading_underscore</code>: when naming a class attribute, invokes name mangling (inside class FooBar, <code>__boo</code> becomes <code>_FooBar__boo</code>; see below).</li>
+<li><code>__double_leading_underscore</code>: (前置双下划线)命名类属性时，触发命名修饰(在FooBar类内部, <code>__boo</code> 命名会被修饰成 <code>_FooBar__boo</code>; 如下).</li>
 <p></p>
 
-<li><code>__double_leading_and_trailing_underscore__</code>: “magic” objects or attributes that live in user-controlled namespaces. E.g. <code>__init__</code>, <code>__import__</code> or <code>__file__</code>. Never invent such names; only use them as documented.</li>
+<li><code>__double_leading_and_trailing_underscore__</code>: (前后双置双下划线)存在于用户控制命名空间的“魔术”对象或属性(命名已存在，但往往需要用户覆写，以实现用户所需功能)。例如， <code>__init__</code>, <code>__import__</code> or <code>__file__</code>. 永远不要自己发明类似的名字；依文档描述使用。</li>
 
 </ul>
 
 
-<h2 id="prescriptive-naming-conventions">Prescriptive: Naming Conventions</h2>
+<h2 id="prescriptive-naming-conventions">说明性：命名约定</h2>
 
 
-<h3 id="names-to-avoid">Names to Avoid</h3>
+<h3 id="names-to-avoid">要避免的名称</h3>
 
 
-<p>Never use the characters ‘l’ (lowercase letter el), ‘O’ (uppercase letter oh), or ‘I’ (uppercase letter eye) as single character variable names.</p>
+<p>永远不要用 ‘l’ (小写L), ‘O’ (大写O), 或 ‘I’ (大写I) 作为单字符变量名.</p>
 
-<p>In some fonts, these characters are indistinguishable from the numerals one and zero. When tempted to use ‘l’, use ‘L’ instead.</p>
-
-
-<h3 id="ascii-compatibility">ASCII Compatibility</h3>
+<p>在某些字体中，这些字符与数字1、数字0几乎无法区分。想用“l”时，用“L”代替。</p>
 
 
-<p>Identifiers used in the standard library must be ASCII compatible as described in the <a href="https://www.python.org/dev/peps/pep-3131/#policy-specification">policy section</a> of <a href="https://www.python.org/dev/peps/pep-3131">PEP 3131</a>.</p>
+<h3 id="ascii-compatibility">ASCII兼容性</h3>
 
 
-<h3 id="package-and-module-names">Package and Module Names</h3>
+<p>标准库中用的标识符，必须与ASCII兼容，如<a href="https://www.python.org/dev/peps/pep-3131">PEP 3131</a>的<a href="https://www.python.org/dev/peps/pep-3131/#policy-specification">policy</a>部分所述。</p>
 
 
-<p>Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.</p>
-
-<p>When an extension module written in C or C++ has an accompanying Python module that provides a higher level (e.g. more object oriented) interface, the C/C++ module has a leading underscore (e.g. <code>_socket</code>).</p>
+<h3 id="package-and-module-names">包和模块的命名</h3>
 
 
-<h3 id="class-names">Class Names</h3>
+<p>模块应该有简短的、全小写的名称。为提高可读性，可在模块命名中用下划线。Python包命名也要用全小写的短名称，但不鼓提倡用下划线。</p>
+
+<p>用C或C++写的扩展模块，如果有附带的Python模块提供更高级(例如，更面向对象)的接口时，C/C++模块名以下划线开头(例如 <code>_socket</code>)。</p>
 
 
-<p>Class names should normally use the CapWords convention.</p>
-
-<p>The naming convention for functions may be used instead in cases where the interface is documented and used primarily as a callable.</p>
-
-<p>Note that there is a separate convention for builtin names: most builtin names are single words (or two words run together), with the CapWords convention used only for exception names and builtin constants.</p>
+<h3 id="class-names">类的命名</h3>
 
 
-<h3 id="type-variable-names">Type Variable Names</h3>
+<p>类名通常应采用CapWords风格。</p>
+
+<p>在接口有文档说明，且主要用作可调用接口时，可使用函数的命名约定。</p>
+
+<p>注意，内置命名(builtin names)有一个特殊约定：大多数内置命名是单个单词(或两个单词连在一起)，而CapWords约定仅用于异常命名和内置常量。</p>
 
 
-<p>Names of type variables introduced in PEP 484 should normally use CapWords
-preferring short names: <code>T</code>, <code>AnyStr</code>, <code>Num</code>. It is recommended to add
-suffixes <code>_co</code> or <code>_contra</code> to the variables used to declare covariant
-or contravariant behavior correspondingly.</p>
+<h3 id="type-variable-names">类型变量命名</h3>
+
+
+<p>PEP 484中引入的类型变量的命名，通常采用简短的CapWords命名约定：<code>T</code>, <code>AnyStr</code>, <code>Num</code>. 建议添加后缀 <code>_co</code> 或 <code>_contra</code> 以声明协变(covariant)和逆变(contravariant)行为。</p>
 
   <pre class='language-python'><code class='language-python'>from typing import TypeVar
 
@@ -903,127 +900,128 @@ or contravariant behavior correspondingly.</p>
   KT_contra = TypeVar('KT_contra', contravariant=True)</code></pre>
 
 
-<h3 id="exception-names">Exception Names</h3>
+<h3 id="exception-names">异常命名</h3>
 
 
-<p>Because exceptions should be classes, the class naming convention applies here. However, you should use the suffix “Error” on your exception names (if the exception actually is an error).</p>
+<p>因为异常也是类，所以类命名约定在这里也适用。不过，应该给异常名加上“Error”后缀(如果异常实际上是个错误)。</p>
 
 
-<h3 id="global-variable-names">Global Variable Names</h3>
+<h3 id="global-variable-names">全局变量的命名</h3>
 
 
-<p>(Let’s hope that these variables are meant for use inside one module only.) The conventions are about the same as those for functions.</p>
+<p>(假定这些变量只能在同一个模块中使用)这些约定与函数的约定大致相同。</p>
 
-<p>Modules that are designed for use via <code>from M import *</code> should use the <code>__all__</code> mechanism to prevent exporting globals, or use the older convention of prefixing such globals with an underscore (which you might want to do to indicate these globals are “module non-public”).</p>
-
-
-<h3 id="function-and-variable-names">Function and Variable Names</h3>
+<p>被设计通过 <code>from M import *</code> 方式使用的模块，应该用 <code>__all__</code> 机制防止导出全局变量, 或者按老约定，在这些全局变量前加一个下划线(你可能想以此表明这些全局变量属于“模块非公开部分”)。</p>
 
 
-<p>Function names should be lowercase, with words separated by underscores as necessary to improve readability.</p>
-
-<p>Variable names follow the same convention as function names.</p>
-
-<p>mixedCase is allowed only in contexts where that’s already the prevailing style (e.g. threading.py), to retain backwards compatibility.</p>
+<h3 id="function-and-variable-names">函数名和变量名</h3>
 
 
-<h3 id="function-and-method-arguments">Function and Method Arguments</h3>
+<p>函数名应该小写，必要时用下划线分隔单词，以提高可读性。</p>
+
+<p>变量名遵循与函数名相同的约定。</p>
+
+<p>mixedCase只在以它为代码风格的上下文中使用(例如threading.py)，以保持向后兼容性。</p>
 
 
-<p>Always use <code>self</code> for the first argument to instance methods.</p>
-
-<p>Always use <code>cls</code> for the first argument to class methods.</p>
-
-<p>If a function argument’s name clashes with a reserved keyword, it is generally better to append a single trailing underscore rather than use an abbreviation or spelling corruption. Thus <code>class_</code> is better than <code>clss</code>. (Perhaps better is to avoid such clashes by using a synonym.)</p>
+<h3 id="function-and-method-arguments">函数和方法参数</h3>
 
 
-<h3 id="method-names-and-instance-variables">Method Names and Instance Variables</h3>
+<p>实例方法的第一个参数总是 <code>self</code> 。</p>
+
+<p>类方法的第一个参数总是 <code>cls</code> 。</p>
+
+<p>如果函数参数名与保留关键字冲突，最好加一个后置下划线，而不是用缩写或变体。<code>class_</code> 就比 <code>clss</code>要好。(或许更好的做法是用同义词来避免冲突)</p>
 
 
-<p>Use the function naming rules: lowercase with words separated by underscores as necessary to improve readability.</p>
-
-<p>Use one leading underscore only for non-public methods and instance variables.</p>
-
-<p>To avoid name clashes with subclasses, use two leading underscores to invoke Python’s name mangling rules.</p>
-
-<p>Python mangles these names with the class name: if class Foo has an attribute named <code>__a</code>, it cannot be accessed by <code>Foo.__a</code>. (An insistent user could still gain access by calling <code>Foo._Foo__a</code>.) Generally, double leading underscores should be used only to avoid name conflicts with attributes in classes designed to be subclassed.</p>
-
-<p><strong>Note:</strong> there is some controversy about the use of __names (see below).</p>
+<h3 id="method-names-and-instance-variables">方法名和实例变量</h3>
 
 
-<h3 id="constants">Constants</h3>
+<p>根据需要，使用函数命名规则：小写，单词间用下划线分隔，以提高可读性。</p>
+
+<p>仅在非公开方法和实例变量名字前加一个下划线。</p>
+
+<p>为避免命名与子类冲突，用前置的双下划线来触发Python的命名修饰机制。</p>
+
+<p>Python类名的命名修饰规则：如果Foo类有个名为 <code>__a</code> 的属性, 不能用 <code>Foo.__a</code> 访问到它. (坚持的用户仍然可以通过调用 <code>Foo._Foo__a</code>访问到它) 一般来说，前置双下划线的命名方法，仅用于避免与设计为子类的类中的属性名冲突。</p>
+
+<p><strong>注意:</strong> 关于 __names 的使用也有一些争议(如下)。</p>
 
 
-<p>Constants are usually defined on a module level and written in all capital letters with underscores separating words. Examples include <code>MAX_OVERFLOW</code> and <code>TOTAL</code>.</p>
+<h3 id="constants">常量</h3>
 
 
-<h3 id="designing-for-inheritance">Designing for Inheritance</h3>
+<p>常量通常在模块级定义，全部大写并用下划线分隔单词。 例如 <code>MAX_OVERFLOW</code> 和 <code>TOTAL</code>.</p>
 
 
-<p>Always decide whether a class’s methods and instance variables (collectively: “attributes”) should be public or non-public. If in doubt, choose non-public; it’s easier to make it public later than to make a public attribute non-public.</p>
+<h3 id="designing-for-inheritance">继承的设计</h3>
 
-<p>Public attributes are those that you expect unrelated clients of your class to use, with your commitment to avoid backwards incompatible changes. Non-public attributes are those that are not intended to be used by third parties; you make no guarantees that non-public attributes won’t change or even be removed.</p>
 
-<p>We don’t use the term “private” here, since no attribute is really private in Python (without a generally unnecessary amount of work).</p>
+<p>总是想清楚，类方法和实例变量(统称为“属性”)应该是公开的还是非公开的。如果有疑问，就选择非公开；在之后，相比把公开属性变成非公开属性，把非公开属性变成公开属性要更容易些。</p>
 
-<p>Another category of attributes are those that are part of the “subclass API” (often called “protected” in other languages). Some classes are designed to be inherited from, either to extend or modify aspects of the class’s behavior. When designing such a class, take care to make explicit decisions about which attributes are public, which are part of the subclass API, and which are truly only to be used by your base class.</p>
+<p>公开属性，是供那些和类设计无关的用户使用的属性，要确保其后续变更不会出现向后不兼容的问题。非公开属性，是那些你不打算让第三方使用的属性；无法确保非公开属性不被改动甚至删除。</p>
 
-<p>With this in mind, here are the Pythonic guidelines:</p>
+<p>在这里，我们不用“私有(private)”这个词，因为在Python中，没有什么属性是真正私有的(以节省往往不必要的额外工作)。</p>
+
+<p>另一类属性，是那些属于“子类API”的属性(在其他语言也叫“受保护的(protected)”)。为扩展或修改类在某些方面的行为，我们会设计出一些继承自这些类的子类。设计这些子类时，要注意明确规划，哪些属性是公开的、哪些属性是子类API的一部分、哪些属性实际上仅供基类使用。</p>
+
+<p>请把这几条放在心上，以下是Python风格的建议:</p>
 
 <ul>
 
-<li>Public attributes should have no leading underscores.</li>
+<li>公开属性名字前不要加下划线。</li>
 <p></p>
 
-<li><p>If your public attribute name collides with a reserved keyword, append a single trailing underscore to your attribute name. This is preferable to an abbreviation or corrupted spelling. (However, notwithstanding this rule, ‘cls’ is the preferred spelling for any variable or argument which is known to be a class, especially the first argument to a class method.)</p>
+<li><p>如果公开属性名与保留关键字冲突，在属性名结尾加一个下划线，比用缩写或变体更好。(不过，尽管有这样的规则，但‘cls’仍然是所有已知为类的变量或参数的首选拼写，尤其是类方法的第一个参数)</p>
 
-<p><strong>Note 1</strong>: See the argument name recommendation above for class methods.</p></li>
+<p><strong>注1</strong>: 关于类方法，参考之前的参数命名建议。</p></li>
 
-<li><p>For simple public data attributes, it is best to expose just the attribute name, without complicated accessor/mutator methods. Keep in mind that Python provides an easy path to future enhancement, should you find that a simple data attribute needs to grow functional behavior. In that case, use properties to hide functional implementation behind simple data attribute access syntax.</p>
+<li><p>对于简单的公共数据属性，最好只公开属性名，而不要公开复杂的调用/设置方法。要是你发现哪个简单数据属性需要增加功能行为，记住，Python已经为将来的扩展提供了简单办法。用<code>property</code>注解，将功能实现隐藏在简单数据属性的访问语法背后。</p>
 
-<p><strong>Note 1</strong>: Properties only work on new-style classes.</p>
+<p><strong>注1</strong>: <code>property</code>注解只对新风格的类有效</p>
 
-<p><strong>Note 2</strong>: Try to keep the functional behavior side-effect free, although side-effects such as caching are generally fine.</p>
+<p><strong>注2</strong>: 尽量让功能行为无副作用，尽管像缓存之类的副作用也没什么大不了。</p>
 
-<p><strong>Note 3</strong>: Avoid using properties for computationally expensive operations; the attribute notation makes the caller believe that access is (relatively) cheap.</p></li>
+<p><strong>注3</strong>: 对计算量大的操作，避免用<code>property</code>注解；属性符号会让调用者以为访问它运算量(相对)不大。</p></li>
 
-<li><p>If your class is intended to be subclassed, and you have attributes that you do not want subclasses to use, consider naming them with double leading underscores and no trailing underscores. This invokes Python’s name mangling algorithm, where the name of the class is mangled into the attribute name. This helps avoid attribute name collisions should subclasses inadvertently contain attributes with the same name.</p>
+<li><p>如果类会被子类继承，而有些属性你不打算让子类用，可以考虑在命名时加前置双下划线、而不是后置下划线。这样会触发Python的命名修饰算法，将类名修饰添加到属性名。这样做，还能避免在子类无意间包含同名属性而引发命名冲突。</p>
 
-<p><strong>Note 1</strong>: Note that only the simple class name is used in the mangled name, so if a subclass chooses both the same class name and attribute name, you can still get name collisions.</p>
+<p><strong>注1</strong>: 注意，命名修饰只是简单地把类名加到修饰名中，如果子类同时有相同的类名和属性名，依然会引发命名冲突。</p>
 
-<p><strong>Note 2</strong>: Name mangling can make certain uses, such as debugging and <code>__getattr__()</code>, less convenient. However the name mangling algorithm is well documented and easy to perform manually.</p>
+<p><strong>注2</strong>: 命名修饰可能会让调试和<code>__getattr__()</code>等的使用变得不那么方便。不过，命名修饰算法有详尽的文档，手动实现也很容易。</p>
 
-<p><strong>Note 3</strong>: Not everyone likes name mangling. Try to balance the need to avoid accidental name clashes with potential use by advanced callers.</p></li>
+<p><strong>注3</strong>: 不是所有人都喜欢命名修饰。在避免意外命名冲突，和满足高级调用者的潜在用法之间，要尽量寻求平衡。</p></li>
 
 </ul>
 
 
-<h2 id="public-and-internal-interfaces">Public and Internal Interfaces</h2>
+<h2 id="public-and-internal-interfaces">公开接口和内部接口</h2>
 
 
-<p>Any backwards compatibility guarantees apply only to public interfaces. Accordingly, it is important that users be able to clearly distinguish between public and internal interfaces.</p>
+<p>Any backwards compatibility guarantees apply only to public interfaces. Accordingly, it is important that users be able to clearly distinguish between public and internal interfaces.<br/>所有向后兼容性保证，都仅限于公开接口。因此，让用户能清楚区分公开接口和内部接口非常重要。</p>
 
-<p>Documented interfaces are considered public, unless the documentation explicitly declares them to be provisional or internal interfaces exempt from the usual backwards compatibility guarantees. All undocumented interfaces should be assumed to be internal.</p>
+<p>Documented interfaces are considered public, unless the documentation explicitly declares them to be provisional or internal interfaces exempt from the usual backwards compatibility guarantees. All undocumented interfaces should be assumed to be internal.<br/>写进文档里的接口，通常可理解为公开的，除非在文档里明确声明是临时的、或是不受向后兼容性保证约束的内部接口。所有没写进文档的接口，都被认为是内部接口。</p>
 
-<p>To better support introspection, modules should explicitly declare the names in their public API using the <code>__all__</code> attribute. Setting <code>__all__</code> to an empty list indicates that the module has no public API.</p>
+<p>To better support introspection, modules should explicitly declare the names in their public API using the <code>__all__</code> attribute. Setting <code>__all__</code> to an empty list indicates that the module has no public API.<br/>为了更好地支持内省(introspection)，模块应使用<code>__all__</code>属性，显式声明公开API有哪些命名。如<code>__all__</code>设为空列表，则表示该模块没有公开API。</p>
 
-<p>Even with <code>__all__</code> set appropriately, internal interfaces (packages, modules, classes, functions, attributes or other names) should still be prefixed with a single leading underscore.</p>
+<p>Even with <code>__all__</code> set appropriately, internal interfaces (packages, modules, classes, functions, attributes or other names) should still be prefixed with a single leading underscore.<br/>即使设置了<code>__all__</code>，内部接口(包、模块、类、函数、属性及其他命名)仍应以一个下划线开头。</p>
 
-<p>An interface is also considered internal if any containing namespace (package, module or class) is considered internal.</p>
+<p>An interface is also considered internal if any containing namespace (package, module or class) is considered internal.<br/>如果任何包含某接口的命名空间(包、模块或类)被认为是内部的，那么该接口也被认为是内部接口。</p>
 
-<p>Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module’s API, such as <code>os.path</code> or a package’s <code>__init__</code> module that exposes functionality from submodules.</p>
+<p>Imported names should always be considered an implementation detail. Other modules must not rely on indirect access to such imported names unless they are an explicitly documented part of the containing module’s API, such as <code>os.path</code> or a package’s <code>__init__</code> module that exposes functionality from submodules.<br/><code>import</code>来的命名，应被视为实现细节。其他模块不得依赖对<code>import</code>命名的间接访问，除非文档明确说明它们是模块API的一部分，就像<code>os.path</code>、和从子模块开放内部功能的包的<code>__init__</code>模块一样。</p>
 
 
-<h1 id="programming-recommendations">Programming Recommendations</h1>
+<h1 id="programming-recommendations">编程建议</h1>
 
 
 <ul>
 
-<li><p>Code should be written in a way that does not disadvantage other implementations of Python (PyPy, Jython, IronPython, Cython, Psyco, and such).</p>
+<li><p>Code should be written in a way that does not disadvantage other implementations of Python (PyPy, Jython, IronPython, Cython, Psyco, and such).<br/>代码的编写，不应对其他版本的Python实现(PyPy、Jython、IronPython、Cyt
+    hon、Psyco等)不利。</p>
 
-<p>For example, do not rely on CPython’s efficient implementation of in-place string concatenation for statements in the form <code>a += b</code> or <code>a = a + b</code>. This optimization is fragile even in CPython (it only works for some types) and isn’t present at all in implementations that don’t use refcounting. In performance sensitive parts of the library, the <code>''.join()</code> form should be used instead. This will ensure that concatenation occurs in linear time across various implementations.</p></li>
+<p>For example, do not rely on CPython’s efficient implementation of in-place string concatenation for statements in the form <code>a += b</code> or <code>a = a + b</code>. This optimization is fragile even in CPython (it only works for some types) and isn’t present at all in implementations that don’t use refcounting. In performance sensitive parts of the library, the <code>''.join()</code> form should be used instead. This will ensure that concatenation occurs in linear time across various implementations.<br/>例如，不要为了利用CPython的就地字符串连接高效实现，而采用<code>a += b</code>或<code>a = a + b</code>这样的形式，即使在CPython中，这种优化也是脆弱的(只适用于某些类型)，更不用说在其他没用引用计数器的实现中，根本没有这种优化。对库中性能敏感的部分，可采用<code>''.join()</code>的形式。这样可以确保在各种实现中，字符串拼接都能在线性时间内完成。</p></li>
 
-<li><p>Comparisons to singletons like None should always be done with <code>is</code> or <code>is not</code>, never the equality operators.</p>
+<li><p>Comparisons to singletons like None should always be done with <code>is</code> or <code>is not</code>, never the equality operators.<br/>类似 <code>None</code> 的单例(singleton)比较，应该总是用 <code>is</code> 或 <code>is not</code> ，而不是用<code>==</code>运算符。</p>
 
 <p>Also, beware of writing <code>if x</code> when you really mean <code>if x is not None</code> – e.g. when testing whether a variable or argument that defaults to None was set to some other value. The other value might have a type (such as a container) that could be false in a boolean context!</p></li>
 
@@ -1315,7 +1313,7 @@ class Test:
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
   <!-- GitHub Banner. -->
-  <a href="https://github.com/fly51fly/fly51fly.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <a href="https://github.com/fly51fly/fly51fly.github.io/tree/master/pep8"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 
   <!-- JavaScripts! -->
